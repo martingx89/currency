@@ -33,4 +33,22 @@ describe('Component ResultBox', () => {
     const output = screen.getByTestId('output');
     expect(output).toHaveTextContent('PLN 32.00 = PLN 32');
   });
+  it('should render "wrong value", if input value are less than "0"', () => {
+    render(<ResultBox from='PLN' to='PLN' amount={-50} />);
+
+    const output = screen.getByTestId('output');
+    expect(output).toHaveTextContent('Wrong value...');
+  });
+  it('should render "wrong value", if input value are less than "0" and USD->PLN', () => {
+    render(<ResultBox from='USD' to='PLN' amount={-50} />);
+
+    const output = screen.getByTestId('output');
+    expect(output).toHaveTextContent('Wrong value...');
+  });
+  it('should render "wrong value", if input value are less than "0" and PLN->USD', () => {
+    render(<ResultBox from='PLN' to='USD' amount={-50} />);
+
+    const output = screen.getByTestId('output');
+    expect(output).toHaveTextContent('Wrong value...');
+  });
 });
